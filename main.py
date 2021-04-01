@@ -1,16 +1,22 @@
-# This is a sample Python script.
+#Web scraper project using freecodecamp.org tutorial
+#https://www.freecodecamp.org/news/scraping-ecommerce-website-with-python/
+#José Dávila 03/31/2021
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+#imports
+from bs4 import BeautifulSoup
+import requests
+import pandas
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+#setting base url and headers
+baseUrl = "https://www.thewhiskyexchange.com"
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
+ 'AppleWebKit''/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'}
+
+#HTTP call to extract li HTML element(item in a list)
+k = requests.get('https://www.thewhiskyexchange.com/c/35/japanese-whisky').text
+soup=BeautifulSoup(k, 'html.parser')
+productlist = soup.find_all("li",{"class":"product-grid__item"})
+print(productlist)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
